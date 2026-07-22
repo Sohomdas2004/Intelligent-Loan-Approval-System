@@ -1,11 +1,9 @@
 import streamlit as st
 import pandas as pd
 import joblib
+from pathlib import Path
 
 
-# -----------------------------------
-# Page Configuration
-# -----------------------------------
 
 st.set_page_config(
     page_title="Loan Approval Predictor",
@@ -14,23 +12,22 @@ st.set_page_config(
 )
 
 
-# -----------------------------------
-# Load Saved Model
-# -----------------------------------
+
+BASE_DIR = Path(r"Intelligent-Loan-Approval-System/App/app.py").resolve().parent.parent
+
+MODEL_PATH = BASE_DIR / "Model" / "loan_approval_model.pkl"
+
+
+
 
 @st.cache_resource
 def load_model():
-    return joblib.load(
-        r"C:\Users\soura\OneDrive\Desktop\Intelligent-Loan-Approval-System\Model\loan_approval_model.pkl"
-    )
+    return joblib.load(MODEL_PATH)
 
 
 model = load_model()
 
 
-# -----------------------------------
-# Application Title
-# -----------------------------------
 
 st.title("🏦 Loan Approval Prediction System")
 
@@ -40,9 +37,6 @@ st.write(
 )
 
 
-# -----------------------------------
-# User Inputs
-# -----------------------------------
 
 gender = st.selectbox(
     "Gender",
@@ -56,7 +50,7 @@ married = st.selectbox(
 
 dependents = st.selectbox(
     "Number of Dependents",
-    [0.0, 1.0, 2.0, 3.0]
+    [0, 1, 2, 3]
 )
 
 education = st.selectbox(
@@ -89,7 +83,7 @@ loan_amount = st.number_input(
 
 loan_amount_term = st.selectbox(
     "Loan Amount Term",
-    [360.0, 180.0, 120.0, 480.0, 300.0, 240.0]
+    [360, 180, 120, 480, 300, 240]
 )
 
 credit_history = st.selectbox(
@@ -103,9 +97,6 @@ property_area = st.selectbox(
 )
 
 
-# -----------------------------------
-# Create Input DataFrame
-# -----------------------------------
 
 input_data = pd.DataFrame({
     "Gender": [gender],
@@ -122,31 +113,32 @@ input_data = pd.DataFrame({
 })
 
 
-# -----------------------------------
-# Display Input Data
-# -----------------------------------
 
 st.subheader("Applicant Information")
 
 st.dataframe(input_data)
 
 
-# -----------------------------------
-# Prediction
-# -----------------------------------
+
 
 if st.button("Predict Loan Approval"):
 
-    prediction = model.predict(input_data)
+    try:
 
-    if prediction[0] == 1:
+        prediction = model.predict(input_data)
 
-        st.success(
-            "🎉 Loan is likely to be APPROVED!"
-        )
+        if prediction[0] == 1:
 
-    else:
+            st.success(
+                "🎉 Loan is likely to be APPROVED!"
+            )
 
-        st.error(
-            "❌ Loan is likely to be REJECTED."
-        )
+        else:
+
+            st.error(
+                "❌ Loan is likely to be REJECTED."
+            )
+
+    except Exception as e:
+
+        st.error(f"Prediction Error: {e}")
