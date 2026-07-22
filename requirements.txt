@@ -1,0 +1,14 @@
+# Data Analysis
+pandas
+numpy
+
+# Data Visualization
+matplotlib
+seaborn
+
+# Machine Learning
+scikit-learn
+xgboost
+
+# Model Saving
+joblib
