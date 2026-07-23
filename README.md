@@ -332,14 +332,14 @@ Through this project, the following concepts were implemented:
 
 **Sohom Das**
 
-Computer Science / Information Technology Student
+Computer Science And Engineering
 
 Interested in:
 
 * Machine Learning
 * Data Science
 * Python Development
-* Software Development
+
 
 ---
 
