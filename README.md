@@ -107,24 +107,15 @@ Intelligent-Loan-Approval-System/
 │
 ├── App/
 │   └── app.py
-│       └── Streamlit application
 │
 ├── Data/
 │   └── Dataset files
-│       └── Dataset used for training and analysis
 │
 ├── Model/
 │   └── loan_approval_model.pkl
-│       └── Serialized trained Machine Learning model
 │
 ├── Notebook/
-│   └── Machine Learning notebook
-│       ├── Data exploration
-│       ├── Data preprocessing
-│       ├── Feature engineering
-│       ├── Model training
-│       └── Model evaluation
-│
+│   └── Machine Learning notebook           
 ├── requirements.txt
 │
 └── README.md
