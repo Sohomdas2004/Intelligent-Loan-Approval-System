@@ -13,8 +13,9 @@ st.set_page_config(
 
 
 
-BASE_DIR = Path(r"Intelligent-Loan-Approval-System/App/app.py").resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 MODEL_PATH = BASE_DIR / "Model" / "loan_approval_model.pkl"
+#MODEL_PATH = Path("C:/Users/soura/OneDrive/Desktop/Intelligent-Loan-Approval-System/Model/loan_approval_model.pkl")
 
 @st.cache_resource
 def load_model():
