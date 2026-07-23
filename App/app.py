@@ -14,16 +14,15 @@ st.set_page_config(
 
 
 BASE_DIR = Path(r"Intelligent-Loan-Approval-System/App/app.py").resolve().parent.parent
-
 MODEL_PATH = BASE_DIR / "Model" / "loan_approval_model.pkl"
-
-
-
 
 @st.cache_resource
 def load_model():
-    return joblib.load(MODEL_PATH)
+    if not MODEL_PATH.exists():
+        st.error(f"Model file not found at: {MODEL_PATH}")
+        st.stop()
 
+    return joblib.load(MODEL_PATH)
 
 model = load_model()
 
